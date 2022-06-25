@@ -52,4 +52,4 @@ custom_proxy_group=🐟 漏网之鱼`select`[]🚀 节点选择`[]🎯 全球直
 enable_rule_generator=true
 overwrite_original_rules=true
 
-clash_rule_base=https://gist.githubusercontent.com/timsims/c9e38a26cd949b1480799cc1f11b42b5/raw/4420936b3afb904b3d534da2fdebf9b8fca5fbed/GeneralClashConfig.yml
+clash_rule_base=https://raw.githubusercontent.com/timsims/clash_rules/main/rule_base
