@@ -21,6 +21,8 @@ DOMAIN-SUFFIX, hls-amt.itunes.apple.com
 DOMAIN-SUFFIX, audio-ssl.itunes.apple.com
 DOMAIN-SUFFIX, upp.itunes.apple.com
 DOMAIN-SUFFIX, itunes.apple.com
+DOMAIN-SUFFIX, aod.itunes.apple.com.edgesuite.net
+DOMAIN-SUFFIX, aod.itunes.g.aaplimg.com
 IP-CIDR,17.0.0.0/8,no-resolve
 IP-CIDR,63.92.224.0/19,no-resolve
 IP-CIDR,65.199.22.0/23,no-resolve
