@@ -47,7 +47,7 @@ external-controller: '127.0.0.1:9090'
 # external-ui: dashboard
 
 # RESTful API 的口令 (可选)
-# secret: ""
+secret: "123456"
 
 # 实验性功能
 experimental:
