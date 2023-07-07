@@ -19,6 +19,8 @@ DOMAIN, hamifans.emome.net
 # > friDay
 USER-AGENT,friDay*
 DOMAIN-SUFFIX,friday.tw
+DOMAIN-SUFFIX,fridaylogger.com
+DOMAIN,aka01p.akamaized.net
 # > CATCHPLAY+
 USER-AGENT,CATCHPLAY*
 DOMAIN-SUFFIX,catchplay.com
