@@ -1,4 +1,4 @@
 DOMAIN, music.apple.com
-DOMAIN, blobstore.apple.com
+DOMAIN-SUFFIX, blobstore.apple.com
 DOMAIN, audio.itunes.apple.com
 DOMAIN, aod.itunes.apple.com
