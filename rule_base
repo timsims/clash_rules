@@ -132,6 +132,16 @@ experimental:
 #rules:
 #  - 'MATCH,DIRECT'
 
+rules:
+  - DOMAIN-SUFFIX,xn--ngstr-lra8j.com,DIRECT
+  - GEOSITE,category-ads-all,REJECT
+  - GEOIP,private,DIRECT,no-resolve
+  - GEOSITE,private,DIRECT
+  - GEOSITE,cn,DIRECT
+  - GEOIP,cn,DIRECT,no-resolve
+  - MATCH,PROXY
+
+
 # Clash for Windows
 # Proxies module latency test settings
 cfw-latency-timeout: 3000
