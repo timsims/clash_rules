@@ -8,6 +8,8 @@
 ;增强中国IP段：不支持
 ;增强国外GFW：不支持
 
+ruleset=🎮 游戏平台,https://raw.githubusercontent.com/LoveMyself666/ACL4SSR/master/Clash/GamePlatform.list
+ruleset=🎮 游戏下载,https://raw.githubusercontent.com/LoveMyself666/ACL4SSR/master/Clash/GameDownload.list
 ruleset=🎯 全球直连,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/LocalAreaNetwork.list
 ruleset=🎯 全球直连,https://raw.githubusercontent.com/timsims/clash_rules/main/rules/direct
 ruleset=🎯 全球直连,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/UnBan.list
@@ -15,9 +17,7 @@ ruleset=🛑 全球拦截,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/mast
 ruleset=🍃 应用净化,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list
 ruleset=📢 谷歌FCM,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/GoogleFCM.list
 ruleset=🎯 全球直连,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/GoogleCN.list
-ruleset=🎯 全球直连,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/SteamCN.list
 ruleset=Apple Music,https://raw.githubusercontent.com/timsims/clash_rules/main/rules/applemusic
-ruleset=Steam,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Steam.list
 ruleset=🍎 苹果服务,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Apple.list
 ruleset=Ⓜ️ XBOX,https://raw.githubusercontent.com/timsims/clash_rules/main/rules/xbox
 ruleset=Ⓜ️ 微软服务,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Microsoft.list
@@ -58,9 +58,10 @@ custom_proxy_group=🎥 Amazon`select`[]🚀 节点选择`[]🎯 全球直连`[]
 custom_proxy_group=Crunchyroll`select`[]🚀 节点选择`[]🎯 全球直连`[]♻️ 自动选择`.*
 custom_proxy_group=Apple Music`select`[]🚀 节点选择`[]🎯 全球直连`[]♻️ 自动选择`.*
 custom_proxy_group=🍎 苹果服务`select`[]🚀 节点选择`[]🎯 全球直连`[]♻️ 自动选择`.*
+custom_proxy_group=🎮 游戏平台`select`[]🚀 节点选择`[]🎯 全球直连`[]♻️ 自动选择`.*
+custom_proxy_group=🎮 游戏下载`select`[]🚀 节点选择`[]🎯 全球直连`[]♻️ 自动选择`.*
 custom_proxy_group=Ⓜ️ 微软服务`select`[]🚀 节点选择`[]🎯 全球直连`[]♻️ 自动选择`.*
 custom_proxy_group=Ⓜ️ XBOX`select`[]🚀 节点选择`[]🎯 全球直连`[]♻️ 自动选择`.*
-custom_proxy_group=Steam`select`[]🚀 节点选择`[]🎯 全球直连`[]♻️ 自动选择`.*
 custom_proxy_group=Sony`select`[]🚀 节点选择`[]🎯 全球直连`[]♻️ 自动选择`.*
 custom_proxy_group=TW`select`[]🚀 节点选择`[]🎯 全球直连`[]♻️ 自动选择`.*
 custom_proxy_group=TikTok`select`[]🚀 节点选择`[]🎯 全球直连`[]♻️ 自动选择`.*
