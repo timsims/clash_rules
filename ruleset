@@ -43,6 +43,7 @@ ruleset=BiliBili港澳台,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/mast
 ruleset=openai,https://raw.githubusercontent.com/timsims/clash_rules/main/rules/openai
 ruleset=Mega,https://raw.githubusercontent.com/timsims/clash_rules/main/rules/mega
 ruleset=Nintendo,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Nintendo/Nintendo.list
+ruleset=Nintendo,https://raw.githubusercontent.com/timsims/clash_rules/main/rules/ptcgpocket
 ruleset=nocn,https://raw.githubusercontent.com/timsims/clash_rules/main/rules/nocn
 ruleset=📲 电报信息,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Telegram.list
 ruleset=🚀 节点选择,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyLite.list
