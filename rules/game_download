@@ -7,6 +7,7 @@ DOMAIN-SUFFIX,cdn.mileweb.cs.steampowered.com.8686c.com
 DOMAIN-SUFFIX,steamcontent.com
 DOMAIN-SUFFIX,steamcdn-a.akamaihd.net
 DOMAIN-SUFFIX,steamserver.net
+DOMAIN-SUFFIX,steamstatic.com
 
 #uplay游戏下载
 DOMAIN,uplaypc-s-ubisoft.cdn.ubi.com
