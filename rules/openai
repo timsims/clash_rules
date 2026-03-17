@@ -1,4 +1,6 @@
 DOMAIN-KEYWORD,github
+DOMAIN-KEYWORD,claude
+DOMAIN-KEYWORD,anthropic
 DOMAIN-SUFFIX, openai.com
 DOMAIN-SUFFIX, grazie.ai
 DOMAIN-SUFFIX, perplexity.ai
