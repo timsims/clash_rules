@@ -1,0 +1,589 @@
+# ==========================================
+# 1. 代理提供者 (Proxy Providers)
+# ==========================================
+proxy-providers:
+  airport_01:
+    type: http
+    url: "这里替换为你的机场真实订阅链接"  # 只需修改这里
+    interval: 0
+    path: ./proxies/airport_01.yaml
+    health-check:
+      enable: true
+      interval: 300
+      url: http://www.gstatic.com/generate_204
+
+# ==========================================
+# 2. 策略组 (Proxy Groups)
+# ==========================================
+proxy-groups:
+  # --- 地区与特征基础分组 (自动筛选) ---
+  - name: 🇭🇰 香港节点
+    type: select
+    use: [airport_01]
+    filter: "(港|HK|Hong)"
+
+  - name: 🇯🇵 日本节点
+    type: select
+    use: [airport_01]
+    filter: "(日|JP|Japan)"
+
+  - name: 🇺🇸 美国节点
+    type: select
+    use: [airport_01]
+    filter: "(美|US|America)"
+
+  - name: 🇸🇬 新加坡节点
+    type: select
+    use: [airport_01]
+    filter: "(新加坡|SG|Singapore)"
+
+  - name: 🇹🇼 台湾节点
+    type: select
+    use: [airport_01]
+    filter: "(台湾|TW|Taiwan)"
+
+  - name: CloudFlare节点
+    type: select
+    use: [airport_01]
+    filter: "(CF)"
+
+  - name: CloudFlare自动选择
+    type: url-test
+    use: [airport_01]
+    filter: "(CF)"
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+
+  - name: ♻️ 自动选择
+    type: url-test
+    use: [airport_01]
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+
+  # --- 全局兜底策略组 ---
+  - name: 🎯 全球直连
+    type: select
+    proxies: [DIRECT, 🚀 节点选择]
+
+  - name: 🛑 全球拦截
+    type: select
+    proxies: [REJECT, DIRECT]
+
+  - name: 🍃 应用净化
+    type: select
+    proxies: [REJECT, DIRECT]
+
+  # --- 主业务策略组 ---
+  - name: 🚀 节点选择
+    type: select
+    use: [airport_01]
+    proxies: [🇭🇰 香港节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点, 🇹🇼 台湾节点, CloudFlare节点, CloudFlare自动选择, DIRECT]
+
+  - name: Google
+    type: select
+    use: [airport_01]
+    proxies: [🚀 节点选择, 🎯 全球直连, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇸 美国节点, 🇸🇬 新加坡节点, 🇹🇼 台湾节点, CloudFlare节点, CloudFlare自动选择]
+
+  - name: 🎥 YouTube
+    type: select
+    use: [airport_01]
+    proxies: [🚀 节点选择, 🎯 全球直连, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇸 美国节点, 🇸🇬 新加坡节点, 🇹🇼 台湾节点, CloudFlare节点, CloudFlare自动选择]
+
+  - name: 🎥 奈飞视频
+    type: select
+    use: [airport_01]
+    proxies: [🚀 节点选择, 🎯 全球直连, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇸 美国节点, 🇸🇬 新加坡节点, 🇹🇼 台湾节点, CloudFlare节点, CloudFlare自动选择]
+
+  - name: 🎥 DisneyPlus
+    type: select
+    use: [airport_01]
+    proxies: [🚀 节点选择, 🎯 全球直连, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇸 美国节点, 🇸🇬 新加坡节点, 🇹🇼 台湾节点, CloudFlare节点, CloudFlare自动选择]
+
+  - name: 🎥 Amazon
+    type: select
+    use: [airport_01]
+    proxies: [🚀 节点选择, 🎯 全球直连, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇸 美国节点, 🇸🇬 新加坡节点, 🇹🇼 台湾节点, CloudFlare节点, CloudFlare自动选择]
+
+  - name: Crunchyroll
+    type: select
+    use: [airport_01]
+    proxies: [🚀 节点选择, 🎯 全球直连, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇸 美国节点, 🇸🇬 新加坡节点, 🇹🇼 台湾节点, CloudFlare节点, CloudFlare自动选择]
+
+  - name: Apple Music
+    type: select
+    use: [airport_01]
+    proxies: [🎯 全球直连, 🚀 节点选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇸 美国节点, 🇸🇬 新加坡节点, 🇹🇼 台湾节点, CloudFlare节点, CloudFlare自动选择]
+
+  - name: 🍎 苹果服务
+    type: select
+    use: [airport_01]
+    proxies: [🎯 全球直连, 🚀 节点选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇸 美国节点, 🇸🇬 新加坡节点, 🇹🇼 台湾节点, CloudFlare节点, CloudFlare自动选择]
+
+  - name: 🎮 游戏平台
+    type: select
+    use: [airport_01]
+    proxies: [🚀 节点选择, 🎯 全球直连, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇸 美国节点, 🇸🇬 新加坡节点, 🇹🇼 台湾节点, CloudFlare节点, CloudFlare自动选择]
+
+  - name: 🎮 游戏下载
+    type: select
+    use: [airport_01]
+    proxies: [🚀 节点选择, 🎯 全球直连, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇸 美国节点, 🇸🇬 新加坡节点, 🇹🇼 台湾节点, CloudFlare节点, CloudFlare自动选择]
+
+  - name: Ⓜ️ Bing
+    type: select
+    use: [airport_01]
+    proxies: [🚀 节点选择, 🎯 全球直连, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇸 美国节点, 🇸🇬 新加坡节点, 🇹🇼 台湾节点, CloudFlare节点, CloudFlare自动选择]
+
+  - name: Ⓜ️ 微软服务
+    type: select
+    use: [airport_01]
+    proxies: [🎯 全球直连, 🚀 节点选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇸 美国节点, 🇸🇬 新加坡节点, 🇹🇼 台湾节点, CloudFlare节点, CloudFlare自动选择]
+
+  - name: Ⓜ️ XBOX
+    type: select
+    use: [airport_01]
+    proxies: [🚀 节点选择, 🎯 全球直连, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇸 美国节点, 🇸🇬 新加坡节点, 🇹🇼 台湾节点, CloudFlare节点, CloudFlare自动选择]
+
+  - name: Sony
+    type: select
+    use: [airport_01]
+    proxies: [🚀 节点选择, 🎯 全球直连, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇸 美国节点, 🇸🇬 新加坡节点, 🇹🇼 台湾节点, CloudFlare节点, CloudFlare自动选择]
+
+  - name: TW
+    type: select
+    use: [airport_01]
+    proxies: [🇹🇼 台湾节点, 🎯 全球直连, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇸 美国节点, 🇸🇬 新加坡节点, 🚀 节点选择, CloudFlare节点, CloudFlare自动选择]
+
+  - name: TikTok
+    type: select
+    use: [airport_01]
+    proxies: [🚀 节点选择, 🎯 全球直连, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇸 美国节点, 🇸🇬 新加坡节点, 🇹🇼 台湾节点, CloudFlare节点, CloudFlare自动选择]
+
+  - name: EHGallery
+    type: select
+    use: [airport_01]
+    proxies: [🚀 节点选择, 🎯 全球直连, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇸 美国节点, 🇸🇬 新加坡节点, 🇹🇼 台湾节点, CloudFlare节点, CloudFlare自动选择]
+
+  - name: openai
+    type: select
+    use: [airport_01]
+    proxies: [🚀 节点选择, 🎯 全球直连, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇸 美国节点, 🇸🇬 新加坡节点, 🇹🇼 台湾节点, CloudFlare节点, CloudFlare自动选择]
+
+  - name: Nintendo
+    type: select
+    use: [airport_01]
+    proxies: [🚀 节点选择, 🎯 全球直连, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇸 美国节点, 🇸🇬 新加坡节点, 🇹🇼 台湾节点, CloudFlare节点, CloudFlare自动选择]
+
+  - name: Mega
+    type: select
+    use: [airport_01]
+    proxies: [🚀 节点选择, 🎯 全球直连, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇸 美国节点, 🇸🇬 新加坡节点, 🇹🇼 台湾节点, CloudFlare节点, CloudFlare自动选择]
+
+  - name: Twitter
+    type: select
+    use: [airport_01]
+    proxies: [🚀 节点选择, 🎯 全球直连, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇸 美国节点, 🇸🇬 新加坡节点, 🇹🇼 台湾节点, CloudFlare节点, CloudFlare自动选择]
+
+  - name: nocn
+    type: select
+    use: [airport_01]
+    proxies: [🚀 节点选择, 🎯 全球直连, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇸 美国节点, 🇸🇬 新加坡节点, 🇹🇼 台湾节点, CloudFlare节点, CloudFlare自动选择]
+
+  - name: 📲 电报信息
+    type: select
+    use: [airport_01]
+    proxies: [🚀 节点选择, 🎯 全球直连, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇸 美国节点, 🇸🇬 新加坡节点, 🇹🇼 台湾节点, CloudFlare节点, CloudFlare自动选择]
+
+  - name: 📢 谷歌FCM
+    type: select
+    use: [airport_01]
+    proxies: [🚀 节点选择, 🎯 全球直连, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇸 美国节点, 🇸🇬 新加坡节点, 🇹🇼 台湾节点, CloudFlare节点, CloudFlare自动选择]
+
+  - name: 🐟 漏网之鱼
+    type: select
+    use: [airport_01]
+    proxies: [🚀 节点选择, 🎯 全球直连, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇸 美国节点, 🇸🇬 新加坡节点, 🇹🇼 台湾节点, CloudFlare节点]
+
+# ==========================================
+# 3. 规则提供者 (Rule Providers)
+# ==========================================
+rule-providers:
+  rp_proxy_1:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/timsims/clash_rules/main/rules/prioitize"
+    path: ./ruleset/rp_proxy_1.yaml
+    interval: 86400
+  rp_game_download:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/timsims/clash_rules/main/rules/game_download"
+    path: ./ruleset/rp_game_download.yaml
+    interval: 86400
+  rp_game_platform:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/timsims/clash_rules/main/rules/game_platform"
+    path: ./ruleset/rp_game_platform.yaml
+    interval: 86400
+  rp_lan:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/LocalAreaNetwork.list"
+    path: ./ruleset/rp_lan.yaml
+    interval: 86400
+  rp_direct:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/timsims/clash_rules/main/rules/direct"
+    path: ./ruleset/rp_direct.yaml
+    interval: 86400
+  rp_unban:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/UnBan.list"
+    path: ./ruleset/rp_unban.yaml
+    interval: 86400
+  rp_banad:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list"
+    path: ./ruleset/rp_banad.yaml
+    interval: 86400
+  rp_ban_program_ad:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/timsims/clash_rules/main/rules/ban_program_ad"
+    path: ./ruleset/rp_ban_program_ad.yaml
+    interval: 86400
+  rp_googlefcm:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/GoogleFCM.list"
+    path: ./ruleset/rp_googlefcm.yaml
+    interval: 86400
+  rp_googlecn:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/GoogleCN.list"
+    path: ./ruleset/rp_googlecn.yaml
+    interval: 86400
+  rp_youtube_1:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTube.list"
+    path: ./ruleset/rp_youtube_1.yaml
+    interval: 86400
+  rp_youtube_2:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTubeMusic.list"
+    path: ./ruleset/rp_youtube_2.yaml
+    interval: 86400
+  rp_youtube_3:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/timsims/clash_rules/main/rules/youtube"
+    path: ./ruleset/rp_youtube_3.yaml
+    interval: 86400
+  rp_google:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/timsims/clash_rules/main/rules/google"
+    path: ./ruleset/rp_google.yaml
+    interval: 86400
+  rp_applemusic:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/timsims/clash_rules/main/rules/applemusic"
+    path: ./ruleset/rp_applemusic.yaml
+    interval: 86400
+  rp_apple:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Apple.list"
+    path: ./ruleset/rp_apple.yaml
+    interval: 86400
+  rp_bing:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/timsims/clash_rules/main/rules/bing"
+    path: ./ruleset/rp_bing.yaml
+    interval: 86400
+  rp_xbox:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/timsims/clash_rules/main/rules/xbox"
+    path: ./ruleset/rp_xbox.yaml
+    interval: 86400
+  rp_microsoft:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Microsoft.list"
+    path: ./ruleset/rp_microsoft.yaml
+    interval: 86400
+  rp_sony:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Sony.yaml"
+    path: ./ruleset/rp_sony.yaml
+    interval: 86400
+  rp_netflix_1:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Netflix.list"
+    path: ./ruleset/rp_netflix_1.yaml
+    interval: 86400
+  rp_netflix_2:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/NetflixIP.list"
+    path: ./ruleset/rp_netflix_2.yaml
+    interval: 86400
+  rp_netflix_3:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/timsims/clash_rules/main/rules/netflix"
+    path: ./ruleset/rp_netflix_3.yaml
+    interval: 86400
+  rp_disney_1:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/DisneyPlus.list"
+    path: ./ruleset/rp_disney_1.yaml
+    interval: 86400
+  rp_disney_2:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/timsims/clash_rules/main/rules/disney"
+    path: ./ruleset/rp_disney_2.yaml
+    interval: 86400
+  rp_amazon_1:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Amazon.list"
+    path: ./ruleset/rp_amazon_1.yaml
+    interval: 86400
+  rp_amazon_2:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/AmazonIp.list"
+    path: ./ruleset/rp_amazon_2.yaml
+    interval: 86400
+  rp_tw_1:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Bahamut.list"
+    path: ./ruleset/rp_tw_1.yaml
+    interval: 86400
+  rp_tw_2:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/timsims/clash_rules/main/rules/tw"
+    path: ./ruleset/rp_tw_2.yaml
+    interval: 86400
+  rp_crunchyroll:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/timsims/clash_rules/main/rules/crunchyroll"
+    path: ./ruleset/rp_crunchyroll.yaml
+    interval: 86400
+  rp_tiktok_1:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/TikTok.list"
+    path: ./ruleset/rp_tiktok_1.yaml
+    interval: 86400
+  rp_tiktok_2:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/timsims/clash_rules/main/rules/capcut"
+    path: ./ruleset/rp_tiktok_2.yaml
+    interval: 86400
+  rp_ehgallery:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/EHGallery.list"
+    path: ./ruleset/rp_ehgallery.yaml
+    interval: 86400
+  rp_openai:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/timsims/clash_rules/main/rules/openai"
+    path: ./ruleset/rp_openai.yaml
+    interval: 86400
+  rp_mega:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/timsims/clash_rules/main/rules/mega"
+    path: ./ruleset/rp_mega.yaml
+    interval: 86400
+  rp_nintendo_1:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Nintendo/Nintendo.list"
+    path: ./ruleset/rp_nintendo_1.yaml
+    interval: 86400
+  rp_nintendo_2:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/timsims/clash_rules/main/rules/ptcgpocket"
+    path: ./ruleset/rp_nintendo_2.yaml
+    interval: 86400
+  rp_twitter:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/timsims/clash_rules/main/rules/twitter"
+    path: ./ruleset/rp_twitter.yaml
+    interval: 86400
+  rp_nocn:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/timsims/clash_rules/main/rules/nocn"
+    path: ./ruleset/rp_nocn.yaml
+    interval: 86400
+  rp_telegram:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Telegram.list"
+    path: ./ruleset/rp_telegram.yaml
+    interval: 86400
+  rp_proxy_lite:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyLite.list"
+    path: ./ruleset/rp_proxy_lite.yaml
+    interval: 86400
+  rp_proxy_2:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/timsims/clash_rules/main/rules/proxy"
+    path: ./ruleset/rp_proxy_2.yaml
+    interval: 86400
+  rp_chinadomain:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaDomain.list"
+    path: ./ruleset/rp_chinadomain.yaml
+    interval: 86400
+  rp_chinacompanyip:
+    type: http
+    behavior: classical
+    format: text
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaCompanyIp.list"
+    path: ./ruleset/rp_chinacompanyip.yaml
+    interval: 86400
+
+# ==========================================
+# 4. 路由规则 (Rules)
+# ==========================================
+rules:
+  # 优先处理直连和拦截
+  - RULE-SET,rp_lan,🎯 全球直连
+  - RULE-SET,rp_direct,🎯 全球直连
+  - RULE-SET,rp_unban,🎯 全球直连
+  - RULE-SET,rp_googlecn,🎯 全球直连
+  - RULE-SET,rp_chinadomain,🎯 全球直连
+  - RULE-SET,rp_chinacompanyip,🎯 全球直连
+
+  - RULE-SET,rp_banad,🛑 全球拦截
+  - RULE-SET,rp_ban_program_ad,🍃 应用净化
+
+  # 具体业务分流
+  - RULE-SET,rp_proxy_1,🚀 节点选择
+  - RULE-SET,rp_game_download,🎮 游戏下载
+  - RULE-SET,rp_game_platform,🎮 游戏平台
+  - RULE-SET,rp_googlefcm,📢 谷歌FCM
+
+  - RULE-SET,rp_youtube_1,🎥 YouTube
+  - RULE-SET,rp_youtube_2,🎥 YouTube
+  - RULE-SET,rp_youtube_3,🎥 YouTube
+
+  - RULE-SET,rp_google,Google
+  - RULE-SET,rp_applemusic,Apple Music
+  - RULE-SET,rp_apple,🍎 苹果服务
+  - RULE-SET,rp_bing,Ⓜ️ Bing
+  - RULE-SET,rp_xbox,Ⓜ️ XBOX
+  - RULE-SET,rp_microsoft,Ⓜ️ 微软服务
+  - RULE-SET,rp_sony,Sony
+
+  - RULE-SET,rp_netflix_1,🎥 奈飞视频
+  - RULE-SET,rp_netflix_2,🎥 奈飞视频
+  - RULE-SET,rp_netflix_3,🎥 奈飞视频
+
+  - RULE-SET,rp_disney_1,🎥 DisneyPlus
+  - RULE-SET,rp_disney_2,🎥 DisneyPlus
+
+  - RULE-SET,rp_amazon_1,🎥 Amazon
+  - RULE-SET,rp_amazon_2,🎥 Amazon
+
+  - RULE-SET,rp_tw_1,TW
+  - RULE-SET,rp_tw_2,TW
+
+  - RULE-SET,rp_crunchyroll,Crunchyroll
+
+  - RULE-SET,rp_tiktok_1,TikTok
+  - RULE-SET,rp_tiktok_2,TikTok
+
+  - RULE-SET,rp_ehgallery,EHGallery
+  - RULE-SET,rp_openai,openai
+  - RULE-SET,rp_mega,Mega
+
+  - RULE-SET,rp_nintendo_1,Nintendo
+  - RULE-SET,rp_nintendo_2,Nintendo
+
+  - RULE-SET,rp_twitter,Twitter
+  - RULE-SET,rp_nocn,nocn
+  - RULE-SET,rp_telegram,📲 电报信息
+
+  - RULE-SET,rp_proxy_lite,🚀 节点选择
+  - RULE-SET,rp_proxy_2,🚀 节点选择
+
+  # GEOIP 规则与兜底
+  - GEOIP,CN,🎯 全球直连
+  - MATCH,🐟 漏网之鱼
